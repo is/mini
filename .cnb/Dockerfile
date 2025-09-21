@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 AS ci
+FROM ubuntu:22.04 AS toolkit
 
 ARG DEBIAN_FRONTEND ENV_MIRROR
 
@@ -9,6 +9,9 @@ RUN \
 apt-get update && \
 apt-get -y install curl git git-lfs xz-utils
 
+
+
+FROM toolkit AS ci
 RUN \
 --mount=type=cache,target=/var/lib/apt/lists,sharing=private \
 apt-get -y install build-essential

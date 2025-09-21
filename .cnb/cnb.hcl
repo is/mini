@@ -26,6 +26,13 @@ target "_common" {
   }
 }
 
+target "toolkit" {
+  inherits = ["_common"]
+  context = ".cnb"
+  tags = ["docker.cnb.cool/beilinmo/cnb-nightstar/armory/mini-toolkit:0.0.1"]  
+  target = "toolkit"
+}
+
 target "ci" {
   inherits = ["_common"]
   context = ".cnb"
