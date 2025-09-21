@@ -22,4 +22,5 @@ main:
     stages:
     - name: build mini
       script: |
-        musl-gcc -static -o mini-static mini.c
+        gcc -o mini mini.c
+        x86_64-linux-musl-gcc -static -o mini-static mini.c
