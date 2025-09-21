@@ -22,7 +22,7 @@ target "_common" {
   }
 
   contexts = {
-    scm-toolkit = "docker-image://docker.cnb.cool/io8/e1/toolkit:0.0.1"
+    scm-toolkit = "docker-image://docker.cnb.cool/io8/e1/toolkit:0.0.2"
   }
 }
 
