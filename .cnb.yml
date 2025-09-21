@@ -1,0 +1,25 @@
+ci:
+  push:
+  - runner:
+      cpus: 4
+    docker:
+      image: docker.cnb.cool/beilinmo/cnb-nightstar/armory/mini-ci:0.0.1
+    services:
+    - docker
+    stages:
+    - name: build toolkit images
+      script: |
+        docker buildx bake -f .cnb/cnb.hcl --push
+
+main:
+  push:
+  - runner:
+      cpus: 4
+    docker:
+      image: docker.cnb.cool/beilinmo/cnb-nightstar/armory/mini-ci:0.0.1
+    services:
+    - docker
+    stages:
+    - name: build mini
+      script: |
+        musl-gcc -static -o mini-static mini.c
