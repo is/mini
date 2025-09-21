@@ -9,6 +9,9 @@ RUN \
 apt-get update && \
 apt-get -y install curl git git-lfs xz-utils
 
+RUN \
+--mount=type=cache,target=/var/lib/apt/lists,sharing=private \
+apt-get -y install build-essential
 
 RUN \
 git clone -b musl-cross https://cnb.cool/beilinmo/CNB-NightStar/is-depot /musl && \

@@ -24,3 +24,11 @@ main:
       script: |
         gcc -o mini mini.c
         x86_64-linux-musl-gcc -static -o mini-static mini.c
+        strip mini-static
+        ls -l
+    - name: upload
+      image: cnbcool/attachments:latest
+      settings: 
+        tag: latest
+        attachments: mini,mini-static
+
