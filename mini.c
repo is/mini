@@ -10,6 +10,7 @@
 #include <sys/wait.h>
 
 
+#define MINI_VERSION "0.0.2"
 
 #define ARRAY_LEN(x)  (sizeof(x) / sizeof((x)[0]))
 
@@ -79,6 +80,7 @@ void scan_and_execute(const char *dir_path) {
 }
 
 int main(int argc, char **argv) {
+    printf("mini -- " MINI_VERSION "\n");
     // 通过环境变量MINI_DIR设置目录，缺省值是/.mini.d
     const char *mini_dir = getenv("MINI_DIR");
     if (mini_dir == NULL) {
@@ -99,6 +101,7 @@ int main(int argc, char **argv) {
     sigprocmask(SIG_SETMASK, &parent_sigset, NULL);
     
     siginfo_t sig;
+    puts("[mini] boot");
 
     while(1) {
         errno = 0;
