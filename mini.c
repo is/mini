@@ -120,7 +120,7 @@ int main(int argc, char **argv) {
             break;
         }
         
-        printf("receive signal: %d\n", sig.si_signo);
+        printf("[mini] receive signal: %d\n", sig.si_signo);
         fflush(stdout);
 
 
