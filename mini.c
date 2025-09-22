@@ -10,7 +10,7 @@
 #include <sys/wait.h>
 
 
-#define MINI_VERSION "0.0.2"
+#define MINI_VERSION "0.0.5"
 
 #define ARRAY_LEN(x)  (sizeof(x) / sizeof((x)[0]))
 
@@ -53,7 +53,7 @@ void scan_and_execute(const char *dir_path) {
     // 打开目录
     dir = opendir(dir_path);
     if (!dir) {
-        perror("opendir failed");
+        printf("[mini] %s is not existed\n", dir_path);
         return;
     }
     
@@ -70,7 +70,8 @@ void scan_and_execute(const char *dir_path) {
         
         // 检查是否可执行
         if (is_executable(full_path)) {
-            printf("Executing: %s\n", full_path);
+            printf("[mini] executing: %s\n", full_path);
+            fflush(stdout);
             execute_file(full_path);
         }
     }
@@ -81,6 +82,7 @@ void scan_and_execute(const char *dir_path) {
 
 int main(int argc, char **argv) {
     printf("mini -- " MINI_VERSION "\n");
+    fflush(stdout);
     // 通过环境变量MINI_DIR设置目录，缺省值是/.mini.d
     const char *mini_dir = getenv("MINI_DIR");
     if (mini_dir == NULL) {
@@ -101,7 +103,8 @@ int main(int argc, char **argv) {
     sigprocmask(SIG_SETMASK, &parent_sigset, NULL);
     
     siginfo_t sig;
-    puts("[mini] boot");
+    printf("[mini] boot\n");
+    fflush(stdout);
 
     while(1) {
         errno = 0;
@@ -118,6 +121,8 @@ int main(int argc, char **argv) {
         }
         
         printf("receive signal: %d\n", sig.si_signo);
+        fflush(stdout);
+
 
         if (sig.si_signo == SIGINT) {
             break;
@@ -139,6 +144,6 @@ int main(int argc, char **argv) {
         }
     }
 
-    printf("exit\n");
+    printf("[mini] exit\n");
     exit(0);
 }
