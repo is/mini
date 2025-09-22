@@ -1,6 +1,4 @@
-# Mini Scanner Implementation
-
-This implementation scans executable files in the `/.mini.d/` directory (or the directory specified by the `MINI_DIR` environment variable) and executes them using fork & exec.
+# Minimal Init (MINI) for container
 
 ## Files
 
